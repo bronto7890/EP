@@ -1,6 +1,6 @@
-package models;
+package book;
 
-public class Book {
+public class book {
 	int id;
 	String title;
 	String author;
@@ -10,7 +10,7 @@ public class Book {
 	String synopsis;
 	
 	
-	public Book(int id, String title, String author, String date, String genres, String characters, String synopsis) {
+	public book(int id, String title, String author, String date, String genres, String characters, String synopsis) {
 		this.id = id;
 		this.title = title;
 		this.author = author;
@@ -20,7 +20,7 @@ public class Book {
 		this.synopsis = synopsis;
 	}
 	
-	public Book() {}
+	public book() {}
 
 	public int getId() {
 		return id;

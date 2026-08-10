@@ -1,44 +1,44 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import db.*;
-import models.*;
+import book.*;
+import data.jsonFunctions;
 
 public class main {
 
 	public static void main(String[] args) {
-		BookDAO bd = new BookDAO();
+		bookDAO bd = new bookDAO();
 		//makeBook(bd);
-		updateBook(bd, bd.getBookId(2449));
+		//updateBook(bd, bd.getBookId(2452));
+		//String list = jsonFunctions.toJson(bd.getBookId(1000));
+		String list = jsonFunctions.toJson(bd.getAllBooks());
+		jsonFunctions.fileWriter(list);
 		System.out.println("finished");
 		//System.out.println(bd.getAllBooks());
 	}
 	
-	public static void makeBook(BookDAO bd) {
-		Book b = new Book(bd.maxId()+1, "test", "test", "test", "test", "test", "test");
+	public static void makeBook(bookDAO bd) {
+		book b = new book(bd.maxId()+1, "test", "test", "test", "test", "test", "test");
 		try {
 			bd.insertBook(b);
 			System.out.println("inserted book at id: "+bd.maxId());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public static void updateBook(BookDAO bd, ArrayList<Book> b) {
+	public static void updateBook(bookDAO bd, ArrayList<book> b) {
 		try {
 			bd.updateBook(b);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public static void deleteBook(BookDAO bd, int id) {
+	public static void deleteBook(bookDAO bd, int id) {
 		try {
 			bd.deleteBook(id);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

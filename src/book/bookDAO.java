@@ -1,5 +1,8 @@
-package db;
+package book;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,11 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import models.Book;
 ;
-public class BookDAO {
-	Book oneBook = null;
+public class bookDAO {
+	book oneBook = null;
 	Connection conn = null;
     Statement stmt = null;
 	String user = "maibaumb";
@@ -44,10 +45,10 @@ public class BookDAO {
 		}
 	}
 
-	private Book getNextBook(ResultSet rs){
-    	Book thisBook=null;
+	private book getNextBook(ResultSet rs){
+    	book thisBook=null;
 		try {
-			thisBook = new Book(
+			thisBook = new book(
 				rs.getInt("id"),
 				rs.getString("title"),
 				rs.getString("author"),
@@ -61,8 +62,8 @@ public class BookDAO {
     	return thisBook;		
 	}
 	
-   public ArrayList<Book> getAllBooks(){
-		ArrayList<Book> allBooks = new ArrayList<Book>();
+   public ArrayList<book> getAllBooks(){
+		ArrayList<book> allBooks = new ArrayList<book>();
 		openConnection();
 	    // Create select statement and execute it
 		try{
@@ -81,8 +82,8 @@ public class BookDAO {
 	   return allBooks;
    }
    
-   public ArrayList<Book> getBookId(int id) {
-	   ArrayList<Book> books = new ArrayList<Book>();
+   public ArrayList<book> getBookId(int id) {
+	   ArrayList<book> books = new ArrayList<book>();
 	   openConnection();
 	   try {
 		   PreparedStatement ps = conn.prepareStatement("select * from books where id = ?;");
@@ -100,8 +101,8 @@ public class BookDAO {
 	   return books;
    }
    
-   public ArrayList<Book> searchBook(String search) {
-	   ArrayList<Book> books = new ArrayList<Book>();
+   public ArrayList<book> searchBook(String search) {
+	   ArrayList<book> books = new ArrayList<book>();
 	   openConnection();
 	   try {
 		   PreparedStatement ps = conn.prepareStatement("select * from books where title = ?;");
@@ -122,7 +123,7 @@ public class BookDAO {
    
    public int maxId() {
 	   int maxId = 0;
-	   ArrayList<Book> books = new ArrayList<Book>();
+	   ArrayList<book> books = new ArrayList<book>();
 	   openConnection();
 	   try {
 		   String query = "select MAX(id) from books;";
@@ -138,7 +139,7 @@ public class BookDAO {
 	   return maxId;
    }
    
-   public void insertBook(Book b) throws SQLException {
+   public void insertBook(book b) throws SQLException {
 	   openConnection();
 	   try {
 		   PreparedStatement ps = conn.prepareStatement("insert into books (id, title, author, date, genres, characters, synopsis) values (?, ?, ?, ?, ?, ?, ?);");
@@ -157,8 +158,8 @@ public class BookDAO {
 	   }
    }
    //UPDATE employees SET name = ?, salary = ? WHERE id = ?
-   public void updateBook(ArrayList<Book> books) throws SQLException {
-	   Book b = books.get(0);
+   public void updateBook(ArrayList<book> books) throws SQLException {
+	   book b = books.get(0);
 	   openConnection();
 	   try {
 		   PreparedStatement ps = conn.prepareStatement("update books set id = ?, title = ?, author = ?, date = ?, genres = ?, characters = ?, synopsis = ? where id = ?;");
@@ -191,5 +192,4 @@ public class BookDAO {
 		   System.out.println(se);
 	   }
    }
-   
 }
