@@ -2,7 +2,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import book.*;
-import data.jsonFunctions;
 
 public class main {
 
@@ -10,10 +9,9 @@ public class main {
 		bookDAO bd = new bookDAO();
 		//makeBook(bd);
 		//updateBook(bd, bd.getBookId(2452));
-		//String list = jsonFunctions.toJson(bd.getBookId(1000));
-		String list = jsonFunctions.toJson(bd.getAllBooks());
-		jsonFunctions.fileWriter(list);
+		//jsonFunctions.fileWriter(bd.getAllBooks());
 		System.out.println("finished");
+		//System.out.println(bd.getBookId(1000));
 		//System.out.println(bd.getAllBooks());
 	}
 	
